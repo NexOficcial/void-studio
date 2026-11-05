@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VOID STUDIO</title>
+<meta name="theme-color" content="#080812">
+<meta name="description" content="VOID STUDIO — независимая игровая студия. Создаём собственные игровые миры и необычные истории.">
+<title>VOID STUDIO — Official Website</title>
 
 <style>
 * {
@@ -24,41 +26,38 @@ body {
     overflow-x: hidden;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: -50%;
-    z-index: -1;
-    pointer-events: none;
-    background:
-        radial-gradient(circle at 25% 30%, #57218a33, transparent 35%),
-        radial-gradient(circle at 75% 65%, #087d9b22, transparent 35%);
-    animation: backgroundMove 14s ease-in-out infinite alternate;
+a {
+    color: inherit;
 }
 
-@keyframes backgroundMove {
-    from { transform: translate(-3%, -2%) scale(1); }
-    to { transform: translate(3%, 2%) scale(1.12); }
+.container {
+    width: min(1100px, 88%);
+    margin: auto;
 }
+
+/* HEADER */
 
 header {
-    padding: 22px 8%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #080812;
+    border-bottom: 1px solid #29213e;
+}
+
+.header-inner {
+    min-height: 76px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #080812ef;
-    border-bottom: 1px solid #ffffff18;
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    backdrop-filter: blur(14px);
+    gap: 20px;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 23px;
     font-weight: 900;
     letter-spacing: 2px;
-    text-shadow: 0 0 18px #a855f766;
+    white-space: nowrap;
 }
 
 .logo span {
@@ -67,181 +66,166 @@ header {
 
 nav {
     display: flex;
-    gap: 25px;
     flex-wrap: wrap;
+    gap: 22px;
 }
 
 nav a {
-    color: #c5c7d8;
+    color: #b9bdd1;
     text-decoration: none;
-    transition: .25s;
+    font-size: 14px;
+    transition: color .2s;
 }
 
 nav a:hover {
     color: #22d3ee;
-    text-shadow: 0 0 12px #22d3ee;
 }
 
-.hero {
-    min-height: 550px;
-    padding: 80px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: radial-gradient(ellipse at center, #482276, #080812 70%);
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before,
-.hero::after {
-    content: "";
-    position: absolute;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    filter: blur(90px);
-    opacity: .2;
-    pointer-events: none;
-}
-
-.hero::before {
-    background: #a855f7;
-    top: 10%;
-    left: 10%;
-    animation: orb 8s ease-in-out infinite alternate;
-}
-
-.hero::after {
-    background: #22d3ee;
-    bottom: 5%;
-    right: 10%;
-    animation: orb 10s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes orb {
-    to { transform: translate(50px, 35px) scale(1.3); }
-}
-
-.tag {
-    color: #22d3ee;
-    letter-spacing: 5px;
-    margin-bottom: 25px;
-    font-size: 12px;
-    position: relative;
-}
-
-h1 {
-    font-size: clamp(45px, 9vw, 90px);
-    line-height: 1.1;
-    position: relative;
-}
-
-.gradient {
-    background: linear-gradient(90deg, #a855f7, #22d3ee, #a855f7);
-    background-size: 200%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: shine 4s linear infinite;
-    filter: drop-shadow(0 0 15px #a855f755);
-}
-
-@keyframes shine {
-    to { background-position: 200%; }
-}
-
-.hero p {
-    max-width: 570px;
-    margin: 25px 0;
-    color: #b9bdd1;
-    line-height: 1.8;
-    position: relative;
-}
+/* BUTTONS */
 
 .button {
     display: inline-block;
-    padding: 14px 23px;
-    border-radius: 8px;
+    padding: 14px 22px;
+    border-radius: 7px;
     background: linear-gradient(110deg, #8757f5, #6944cf);
     color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: .3s;
-    box-shadow: 0 0 15px #8757f533;
-    text-align: center;
+    font-size: 13px;
+    transition: .2s;
+    border: none;
+    cursor: pointer;
 }
 
 .button:hover {
     background: #22d3ee;
-    color: #080910;
-    transform: translateY(-4px) scale(1.04);
-    box-shadow: 0 0 30px #22d3ee88;
+    color: #080812;
+    transform: translateY(-2px);
 }
 
-.download-button {
-    margin-top: 12px;
+.button.secondary {
+    background: #17172b;
+    border: 1px solid #393052;
+}
+
+.button.secondary:hover {
+    background: #25203d;
+    color: white;
+}
+
+.button.cyan {
     background: linear-gradient(110deg, #0891b2, #0e7490);
 }
 
+/* HERO */
+
+.hero {
+    min-height: 570px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 20px;
+    background:
+        radial-gradient(ellipse at 50% 40%, #482276 0%, #17102c 38%, #080812 75%);
+    border-bottom: 1px solid #29213e;
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.tag {
+    color: #22d3ee;
+    font-size: 12px;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 9vw, 92px);
+    line-height: 1.05;
+    letter-spacing: -3px;
+}
+
+.gradient {
+    background: linear-gradient(90deg, #a855f7, #22d3ee);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #c0bdd5;
+    line-height: 1.8;
+    max-width: 570px;
+    margin: 25px auto 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* GENERAL SECTIONS */
+
 section {
-    padding: 70px 8%;
+    padding: 85px 0;
 }
 
 .section-label {
     color: #22d3ee;
+    font-size: 11px;
     letter-spacing: 4px;
-    font-size: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 13px;
 }
 
-h2 {
-    font-size: 38px;
+.section-title {
+    font-size: clamp(30px, 5vw, 42px);
     margin-bottom: 15px;
-    text-shadow: 0 0 20px #a855f733;
 }
 
-.description {
+.section-description {
     color: #aaa8c5;
-    margin-bottom: 35px;
     line-height: 1.7;
+    margin-bottom: 35px;
 }
+
+/* GAMES */
 
 .games {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 25px;
+    gap: 24px;
 }
 
 .card {
     background: #111120;
     border: 1px solid #292b42;
-    border-radius: 14px;
+    border-radius: 13px;
     overflow: hidden;
-    transition: .35s;
+    transition: .25s;
 }
 
 .card:hover {
-    transform: translateY(-9px);
-    border-color: #a855f7;
-    box-shadow: 0 0 30px #a855f744;
+    transform: translateY(-5px);
+    border-color: #8757f5;
 }
 
 .cover {
-    height: 230px;
+    height: 220px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
-    position: relative;
-    overflow: hidden;
+    text-align: center;
 }
 
 .cloud-cover {
     background:
-        linear-gradient(#08081222, #08081244),
+        linear-gradient(#08081244, #08081277),
         url("cloud-factory-cover.png") center / cover no-repeat;
 }
 
@@ -249,14 +233,9 @@ h2 {
     background: linear-gradient(135deg, #401d46, #17172d);
 }
 
-.symbol {
-    font-size: 85px;
-    filter: drop-shadow(0 0 20px #a5e9ff);
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    50% { transform: translateY(-12px); }
+.project-symbol {
+    font-size: 75px;
+    color: #22d3ee;
 }
 
 .cover h3 {
@@ -274,13 +253,17 @@ h2 {
     background: #123b32;
     color: #75f0c0;
     border-radius: 5px;
-    font-size: 11px;
+    font-size: 10px;
     margin-bottom: 16px;
 }
 
 .status.planned {
     background: #29223f;
     color: #c4b5fd;
+}
+
+.card-content h3 {
+    font-size: 21px;
 }
 
 .card-content p {
@@ -290,13 +273,102 @@ h2 {
     min-height: 75px;
 }
 
-.news {
-    background: linear-gradient(180deg, #0d0e19, #111020);
+/* GAME OF THE MONTH */
+
+.featured {
+    background: linear-gradient(135deg, #17102b, #101827);
+    border: 1px solid #45316b;
+    border-radius: 15px;
+    padding: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
 }
+
+.featured-label {
+    color: #22d3ee;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.featured h3 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.featured p {
+    color: #b9bdd1;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+.featured-art {
+    min-height: 220px;
+    border-radius: 12px;
+    background:
+        linear-gradient(#08081233, #08081266),
+        url("cloud-factory-cover.png") center / cover no-repeat;
+}
+
+/* VOID STATUS */
+
+.status-section {
+    background: #0d0e19;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.status-card {
+    background: #151528;
+    border: 1px solid #302b50;
+    border-radius: 12px;
+    padding: 23px;
+}
+
+.status-card h3 {
+    margin-bottom: 12px;
+}
+
+.status-card p {
+    color: #aaa8c5;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.progress-track {
+    width: 100%;
+    height: 7px;
+    background: #29253c;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 17px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #8757f5, #22d3ee);
+    border-radius: 10px;
+}
+
+.progress-caption {
+    display: flex;
+    justify-content: space-between;
+    color: #aaa8c5;
+    font-size: 11px;
+    margin-top: 9px;
+}
+
+/* NEWS */
 
 .news-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
 }
 
@@ -305,36 +377,31 @@ h2 {
     background: #151528;
     border: 1px solid #302b50;
     border-radius: 12px;
-    transition: .3s;
-}
-
-.news-card:hover {
-    transform: translateY(-7px);
-    border-color: #22d3ee;
-    box-shadow: 0 0 25px #22d3ee33;
 }
 
 .news-icon {
-    font-size: 35px;
+    font-size: 32px;
     margin-bottom: 17px;
 }
 
 .news-date {
     color: #22d3ee;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 2px;
     margin-bottom: 12px;
 }
 
 .news-card h3 {
     margin-bottom: 12px;
-    font-size: 20px;
 }
 
 .news-card p {
     color: #b9bdd1;
     line-height: 1.7;
+    font-size: 14px;
 }
+
+/* ABOUT */
 
 .about {
     text-align: center;
@@ -348,55 +415,59 @@ h2 {
     line-height: 1.9;
 }
 
+/* FOOTER */
+
 footer {
-    padding: 30px;
-    text-align: center;
-    color: #9296ad;
+    padding: 35px 0;
     border-top: 1px solid #292b42;
+    color: #9296ad;
+    text-align: center;
+    font-size: 13px;
 }
 
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity .7s ease, transform .7s ease;
+.footer-logo {
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
 }
 
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+.footer-logo span {
+    color: #22d3ee;
 }
 
-@media (max-width: 600px) {
-    header {
+/* MOBILE */
+
+@media (max-width: 650px) {
+    .header-inner {
         flex-direction: column;
-        gap: 18px;
+        padding: 18px 0;
     }
 
     nav {
         justify-content: center;
-        gap: 18px;
+        gap: 15px;
+    }
+
+    .hero {
+        min-height: 480px;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
     }
 
     section {
-        padding: 55px 6%;
+        padding: 60px 0;
     }
 
-    h2 {
-        font-size: 30px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
+    .featured {
+        grid-template-columns: 1fr;
+        padding: 23px;
     }
 
-    .reveal {
-        opacity: 1;
-        transform: none;
+    .featured-art {
+        min-height: 180px;
     }
 }
 </style>
@@ -405,178 +476,289 @@ footer {
 <body>
 
 <header>
-    <div class="logo">VOID<span>STUDIO</span></div>
+    <div class="container header-inner">
+        <div class="logo">VOID<span>STUDIO</span></div>
 
-    <nav>
-        <a href="#games">Игры</a>
-        <a href="#news">Новости</a>
-        <a href="#about">О студии</a>
-    </nav>
+        <nav>
+            <a href="#games">Игры</a>
+            <a href="#featured">Игра месяца</a>
+            <a href="#status">Статус</a>
+            <a href="#news">Новости</a>
+            <a href="#about">О студии</a>
+        </nav>
+    </div>
 </header>
 
 <main>
 
+<!-- HERO -->
+
 <section class="hero">
-    <div class="tag">INDEPENDENT GAME STUDIO</div>
+    <div class="hero-content">
+        <div class="tag">INDEPENDENT GAME STUDIO</div>
 
-    <h1>
-        МИРЫ.<br>
-        <span class="gradient">БЕЗ ГРАНИЦ.</span>
-    </h1>
+        <h1>
+            МИРЫ.<br>
+            <span class="gradient">БЕЗ ГРАНИЦ.</span>
+        </h1>
 
-    <p>
-        Мы создаём собственные игровые миры,
-        необычные истории и проекты,
-        в которые хочется возвращаться.
-    </p>
+        <p>
+            Мы создаём собственные игровые миры,
+            необычные истории и проекты,
+            в которые хочется возвращаться.
+        </p>
 
-    <a class="button" href="#games">НАШИ ИГРЫ ↓</a>
+        <div class="hero-buttons">
+            <a class="button" href="#games">НАШИ ИГРЫ ↓</a>
+            <a class="button secondary" href="#about">О СТУДИИ</a>
+        </div>
+    </div>
 </section>
 
+<!-- GAMES -->
+
 <section id="games">
-    <div class="section-label">НАШИ ПРОЕКТЫ</div>
-    <h2>Игры студии</h2>
-    <p class="description">Следи за разработкой наших игр.</p>
+    <div class="container">
+        <div class="section-label">НАШИ ПРОЕКТЫ</div>
+        <h2 class="section-title">Игры студии</h2>
+        <p class="section-description">
+            Знакомься с нашими игровыми проектами.
+        </p>
 
-    <div class="games">
+        <div class="games">
 
-        <article class="card reveal">
-            <div class="cover cloud-cover"
-                 role="img"
-                 aria-label="Обложка CLOUD FACTORY">
-            </div>
+            <article class="card">
+                <div class="cover cloud-cover"
+                     role="img"
+                     aria-label="Обложка CLOUD FACTORY">
+                </div>
 
-            <div class="card-content">
-                <div class="status">
-                    ● БЕСПЛАТНАЯ ДЕМО ВЕРСИЯ
+                <div class="card-content">
+                    <div class="status">
+                        ● ДЕМО ДОСТУПНА
+                    </div>
+
+                    <h3>CLOUD FACTORY</h3>
+
+                    <p>
+                        Создавай облака, развивай производство,
+                        открывай улучшения и расширяй свою фабрику.
+                        Попробуй демоверсию для Windows!
+                    </p>
+
+                    <a class="button" href="cloud-factory.html">
+                        О ПРОЕКТЕ →
+                    </a>
+
+                    <br><br>
+
+                    <a class="button cyan"
+                       href="https://github.com/e6784209-pixel/void-studio/releases/download/v0.1-demo/CloudFactory-DEMO.zip">
+                        ↓ DOWNLOAD DEMO
+                    </a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="cover project-cover">
+                    <div class="project-symbol">✦</div>
+                    <h3>PROJECT 02</h3>
+                </div>
+
+                <div class="card-content">
+                    <div class="status planned">
+                        ● В ПЛАНАХ
+                    </div>
+
+                    <h3>PROJECT 02</h3>
+
+                    <p>
+                        Новый игровой проект VOID STUDIO.
+                        Подробности появятся позже.
+                    </p>
+
+                    <a class="button secondary" href="#news">
+                        СЛЕДИТЬ ЗА НОВОСТЯМИ
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED GAME -->
+
+<section id="featured">
+    <div class="container">
+        <div class="featured">
+
+            <div>
+                <div class="featured-label">
+                    ★ GAME OF THE MONTH
                 </div>
 
                 <h3>CLOUD FACTORY</h3>
 
                 <p>
-                    Создавай облака, развивай производство,
-                    открывай улучшения и расширяй свою фабрику.
-                    Попробуй бесплатную демоверсию для Windows!
+                    Наш главный игровой проект.
+                    Построй собственную облачную фабрику,
+                    развивай производство и открывай новые возможности.
                 </p>
 
                 <a class="button" href="cloud-factory.html">
-                    О ПРОЕКТЕ →
-                </a>
-
-                <br>
-
-                <a class="button download-button"
-                   href="https://github.com/e6784209-pixel/void-studio/releases/download/v0.1-demo/CloudFactory-DEMO.zip">
-                    ↓ DOWNLOAD DEMO — FREE
+                    УЗНАТЬ БОЛЬШЕ →
                 </a>
             </div>
-        </article>
 
-        <article class="card reveal">
-            <div class="cover project-cover">
-                <div class="symbol">✦</div>
-                <h3>PROJECT 02</h3>
+            <div class="featured-art"
+                 role="img"
+                 aria-label="CLOUD FACTORY">
             </div>
 
-            <div class="card-content">
-                <div class="status planned">● В ПЛАНАХ</div>
+        </div>
+    </div>
+</section>
+
+<!-- VOID STATUS -->
+
+<section class="status-section" id="status">
+    <div class="container">
+        <div class="section-label">DEVELOPMENT TRACKER</div>
+        <h2 class="section-title">VOID STATUS</h2>
+
+        <p class="section-description">
+            Следи за состоянием игровых проектов студии.
+        </p>
+
+        <div class="status-grid">
+
+            <article class="status-card">
+                <div class="status">
+                    ● ЕСТЬ ДЕМО
+                </div>
+
+                <h3>CLOUD FACTORY</h3>
+
+                <p>
+                    Первая демоверсия доступна.
+                    Разработка продолжается.
+                </p>
+
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 35%"></div>
+                </div>
+
+                <div class="progress-caption">
+                    <span>Разработка</span>
+                    <span>35%</span>
+                </div>
+            </article>
+
+            <article class="status-card">
+                <div class="status planned">
+                    ● ОЖИДАЕТ
+                </div>
 
                 <h3>PROJECT 02</h3>
 
                 <p>
-                    Здесь появится информация
-                    о следующей игре нашей студии.
+                    Подробности проекта пока не объявлены.
                 </p>
 
-                <a class="button" href="#about">СКОРО</a>
-            </div>
-        </article>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
 
+                <div class="progress-caption">
+                    <span>Разработка</span>
+                    <span>0%</span>
+                </div>
+            </article>
+
+        </div>
     </div>
 </section>
 
-<section class="news" id="news">
-    <div class="section-label">ПОСЛЕДНИЕ ОБНОВЛЕНИЯ</div>
-    <h2>Новости студии</h2>
+<!-- NEWS -->
 
-    <p class="description">
-        Узнавай, что происходит в VOID STUDIO.
-    </p>
+<section id="news">
+    <div class="container">
+        <div class="section-label">LATEST UPDATES</div>
+        <h2 class="section-title">Новости студии</h2>
 
-    <div class="news-list">
+        <p class="section-description">
+            Всё самое интересное из мира VOID STUDIO.
+        </p>
 
-        <article class="news-card reveal">
-            <div class="news-icon">☁️</div>
-            <div class="news-date">CLOUD FACTORY</div>
-            <h3>Бесплатная демоверсия</h3>
-            <p>
-                Первая демоверсия CLOUD FACTORY
-                уже доступна для скачивания!
-            </p>
-        </article>
+        <div class="news-list">
 
-        <article class="news-card reveal">
-            <div class="news-icon">🏭</div>
-            <div class="news-date">РАЗРАБОТКА</div>
-            <h3>Новые возможности</h3>
-            <p>
-                В будущем мы планируем расширять
-                возможности облачной фабрики
-                и добавлять новые игровые механики.
-            </p>
-        </article>
+            <article class="news-card">
+                <div class="news-icon">☁️</div>
+                <div class="news-date">CLOUD FACTORY</div>
+                <h3>Демоверсия доступна!</h3>
 
-        <article class="news-card reveal">
-            <div class="news-icon">💜</div>
-            <div class="news-date">VOID STUDIO</div>
-            <h3>Обновление сайта</h3>
-            <p>
-                На официальном сайте появился
-                раздел новостей, где публикуются
-                обновления наших проектов.
-            </p>
-        </article>
+                <p>
+                    Первая демоверсия CLOUD FACTORY
+                    уже доступна для скачивания.
+                </p>
+            </article>
 
+            <article class="news-card">
+                <div class="news-icon">🏭</div>
+                <div class="news-date">DEVELOPMENT</div>
+                <h3>Новые возможности</h3>
+
+                <p>
+                    Мы продолжаем работать над
+                    новыми игровыми механиками.
+                </p>
+            </article>
+
+            <article class="news-card">
+                <div class="news-icon">💜</div>
+                <div class="news-date">VOID STUDIO</div>
+                <h3>Новая версия сайта</h3>
+
+                <p>
+                    VOID STUDIO получает обновлённый
+                    дизайн и новый раздел VOID STATUS.
+                </p>
+            </article>
+
+        </div>
     </div>
 </section>
+
+<!-- ABOUT -->
 
 <section class="about" id="about">
-    <div class="section-label">О НАС</div>
-    <h2>VOID STUDIO</h2>
+    <div class="container">
+        <div class="section-label">WHO WE ARE</div>
+        <h2 class="section-title">VOID STUDIO</h2>
 
-    <p>
-        Мы создаём собственные игровые проекты,
-        превращая идеи в настоящие игровые миры.
-        Сейчас мы работаем над CLOUD FACTORY.
-    </p>
+        <p>
+            Мы создаём собственные игровые проекты,
+            превращая идеи в настоящие игровые миры.
+            Наша цель — создавать игры,
+            которые запоминаются.
+        </p>
+    </div>
 </section>
 
 </main>
 
 <footer>
-    © 2026 VOID STUDIO · Все права защищены.
+    <div class="container">
+        <div class="footer-logo">
+            VOID<span>STUDIO</span>
+        </div>
+
+        <p>Independent Game Studio</p>
+        <br>
+        <p>© 2026 VOID STUDIO · Все права защищены.</p>
+    </div>
 </footer>
-
-<script>
-const revealItems = document.querySelectorAll(".reveal");
-
-if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.12
-    });
-
-    revealItems.forEach(item => observer.observe(item));
-} else {
-    revealItems.forEach(item => item.classList.add("visible"));
-}
-</script>
 
 </body>
 </html>
