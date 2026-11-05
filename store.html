@@ -93,6 +93,7 @@ h1 {
     letter-spacing: 3px;
     background: linear-gradient(135deg, #27134b, #090811);
     color: #c9a3ff;
+    text-align: center;
 }
 
 .cover.second {
@@ -123,28 +124,20 @@ h1 {
 button {
     width: 100%;
     padding: 14px;
-    background: #9255df;
-    color: white;
+    background: #37303f;
+    color: #aaa;
     border: none;
     border-radius: 10px;
     font-size: 16px;
     font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    background: #ad79f2;
-}
-
-button:disabled {
-    background: #37303f;
-    color: #aaa;
     cursor: not-allowed;
 }
 
-.owned {
-    background: #267a55;
+.notice {
+    color: #aaa2b9;
+    font-size: 13px;
+    margin-top: 25px;
+    line-height: 1.5;
 }
 
 footer {
@@ -154,12 +147,6 @@ footer {
     border-top: 1px solid #29213d;
 }
 
-.notice {
-    color: #aaa2b9;
-    font-size: 13px;
-    margin-top: 25px;
-    line-height: 1.5;
-}
 </style>
 </head>
 
@@ -167,13 +154,16 @@ footer {
 
 <header>
     <div class="logo">VOID STUDIO</div>
+
     <div class="balance">
-        🪙 Баланс: <span id="balance">300</span> VC
+        🪙 Баланс: 300 VC
     </div>
 </header>
 
 <main>
+
     <h1>ИГРОВОЙ МАГАЗИН</h1>
+
     <p class="subtitle">
         Открывай новые миры вместе с VOID STUDIO.
     </p>
@@ -181,113 +171,60 @@ footer {
     <div class="games">
 
         <div class="game">
-            <div class="cover">CLOUD FACTORY</div>
+
+            <div class="cover">
+                CLOUD FACTORY
+            </div>
+
             <div class="info">
                 <h2>Cloud Factory</h2>
+
                 <p class="description">
                     Построй собственную фабрику облаков!
                 </p>
+
                 <div class="price">99 VC</div>
-                <button id="buy-cloud" onclick="buyGame('cloud', 99)">
-                    Купить
+
+                <button disabled>
+                    Скоро
                 </button>
             </div>
+
         </div>
 
         <div class="game">
-            <div class="cover second">COMING SOON</div>
+
+            <div class="cover second">
+                COMING SOON
+            </div>
+
             <div class="info">
                 <h2>Новая игра</h2>
+
                 <p class="description">
                     Название и описание скоро появятся.
                 </p>
+
                 <div class="price">159 VC</div>
-                <button id="buy-new" onclick="buyGame('new', 159)">
-                    Купить
+
+                <button disabled>
+                    Скоро
                 </button>
             </div>
+
         </div>
 
     </div>
 
     <p class="notice">
-        Демонстрационный магазин. Покупки тестовые,
-        реальные деньги не списываются.
-        Тестовый баланс: 300 VC.
+        VOID STUDIO STORE © 2026
     </p>
+
 </main>
 
 <footer>
     © 2026 VOID STUDIO
 </footer>
-
-<script>
-const defaultBalance = 300;
-
-let balance = Number(localStorage.getItem("void_balance"));
-
-if (!Number.isFinite(balance) || balance < 0) {
-    balance = defaultBalance;
-    localStorage.setItem("void_balance", balance);
-}
-
-let owned = JSON.parse(
-    localStorage.getItem("void_owned") || "[]"
-);
-
-function updateStore() {
-    document.getElementById("balance").textContent = balance;
-
-    document.getElementById("buy-cloud").textContent =
-        owned.includes("cloud") ? "Куплено ✓" : "Купить";
-
-    document.getElementById("buy-new").textContent =
-        owned.includes("new") ? "Куплено ✓" : "Купить";
-
-    document.getElementById("buy-cloud").disabled =
-        owned.includes("cloud");
-
-    document.getElementById("buy-new").disabled =
-        owned.includes("new");
-
-    document.getElementById("buy-cloud").classList.toggle(
-        "owned", owned.includes("cloud")
-    );
-
-    document.getElementById("buy-new").classList.toggle(
-        "owned", owned.includes("new")
-    );
-}
-
-function buyGame(id, price) {
-    if (owned.includes(id)) {
-        return;
-    }
-
-    if (balance < price) {
-        alert("Недостаточно VOID COINS!");
-        return;
-    }
-
-    const confirmed = confirm(
-        "Купить эту игру за " + price + " VC?"
-    );
-
-    if (!confirmed) return;
-
-    balance -= price;
-    owned.push(id);
-
-    localStorage.setItem("void_balance", balance);
-    localStorage.setItem("void_owned", JSON.stringify(owned));
-
-    updateStore();
-
-    alert("Покупка успешно совершена!");
-}
-
-updateStore();
-</script>
 
 </body>
 </html>
