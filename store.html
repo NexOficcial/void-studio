@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOID STUDIO — STORE</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #090811;
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    border-bottom: 1px solid #29213d;
+    background: #100d1b;
+}
+
+.logo {
+    color: #b58aff;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.balance {
+    background: #211634;
+    border: 1px solid #8755c9;
+    padding: 12px 20px;
+    border-radius: 12px;
+    color: #d8baff;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 60px 25px;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #aaa2b9;
+    margin-bottom: 40px;
+}
+
+.games {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.game {
+    background: #151120;
+    border: 1px solid #302342;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+.game:hover {
+    transform: translateY(-6px);
+    border-color: #a36aff;
+    box-shadow: 0 0 25px #8d4cff33;
+}
+
+.cover {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, #27134b, #090811);
+    color: #c9a3ff;
+}
+
+.cover.second {
+    background: linear-gradient(135deg, #40204b, #11101d);
+}
+
+.info {
+    padding: 22px;
+}
+
+.info h2 {
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #aaa2b9;
+    line-height: 1.5;
+    min-height: 45px;
+}
+
+.price {
+    margin: 20px 0;
+    color: #d2aaff;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #9255df;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #ad79f2;
+}
+
+button:disabled {
+    background: #37303f;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.owned {
+    background: #267a55;
+}
+
+footer {
+    text-align: center;
+    color: #777080;
+    padding: 30px;
+    border-top: 1px solid #29213d;
+}
+
+.notice {
+    color: #aaa2b9;
+    font-size: 13px;
+    margin-top: 25px;
+    line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">VOID STUDIO</div>
+    <div class="balance">
+        🪙 Баланс: <span id="balance">300</span> VC
+    </div>
+</header>
+
+<main>
+    <h1>ИГРОВОЙ МАГАЗИН</h1>
+    <p class="subtitle">
+        Открывай новые миры вместе с VOID STUDIO.
+    </p>
+
+    <div class="games">
+
+        <div class="game">
+            <div class="cover">CLOUD FACTORY</div>
+            <div class="info">
+                <h2>Cloud Factory</h2>
+                <p class="description">
+                    Построй собственную фабрику облаков!
+                </p>
+                <div class="price">99 VC</div>
+                <button id="buy-cloud" onclick="buyGame('cloud', 99)">
+                    Купить
+                </button>
+            </div>
+        </div>
+
+        <div class="game">
+            <div class="cover second">COMING SOON</div>
+            <div class="info">
+                <h2>Новая игра</h2>
+                <p class="description">
+                    Название и описание скоро появятся.
+                </p>
+                <div class="price">159 VC</div>
+                <button id="buy-new" onclick="buyGame('new', 159)">
+                    Купить
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="notice">
+        Демонстрационный магазин. Покупки тестовые,
+        реальные деньги не списываются.
+        Тестовый баланс: 300 VC.
+    </p>
+</main>
+
+<footer>
+    © 2026 VOID STUDIO
+</footer>
+
+<script>
+const defaultBalance = 300;
+
+let balance = Number(localStorage.getItem("void_balance"));
+
+if (!Number.isFinite(balance) || balance < 0) {
+    balance = defaultBalance;
+    localStorage.setItem("void_balance", balance);
+}
+
+let owned = JSON.parse(
+    localStorage.getItem("void_owned") || "[]"
+);
+
+function updateStore() {
+    document.getElementById("balance").textContent = balance;
+
+    document.getElementById("buy-cloud").textContent =
+        owned.includes("cloud") ? "Куплено ✓" : "Купить";
+
+    document.getElementById("buy-new").textContent =
+        owned.includes("new") ? "Куплено ✓" : "Купить";
+
+    document.getElementById("buy-cloud").disabled =
+        owned.includes("cloud");
+
+    document.getElementById("buy-new").disabled =
+        owned.includes("new");
+
+    document.getElementById("buy-cloud").classList.toggle(
+        "owned", owned.includes("cloud")
+    );
+
+    document.getElementById("buy-new").classList.toggle(
+        "owned", owned.includes("new")
+    );
+}
+
+function buyGame(id, price) {
+    if (owned.includes(id)) {
+        return;
+    }
+
+    if (balance < price) {
+        alert("Недостаточно VOID COINS!");
+        return;
+    }
+
+    const confirmed = confirm(
+        "Купить эту игру за " + price + " VC?"
+    );
+
+    if (!confirmed) return;
+
+    balance -= price;
+    owned.push(id);
+
+    localStorage.setItem("void_balance", balance);
+    localStorage.setItem("void_owned", JSON.stringify(owned));
+
+    updateStore();
+
+    alert("Покупка успешно совершена!");
+}
+
+updateStore();
+</script>
+
+</body>
+</html>
