@@ -68,6 +68,7 @@ nav {
     display: flex;
     flex-wrap: wrap;
     gap: 22px;
+    align-items: center;
 }
 
 nav a {
@@ -79,6 +80,24 @@ nav a {
 
 nav a:hover {
     color: #22d3ee;
+}
+
+/* LAUNCHER HEADER BUTTON */
+
+nav a.launcher-download {
+    color: #080812;
+    background: linear-gradient(110deg, #22d3ee, #8b5cf6);
+    padding: 10px 14px;
+    border-radius: 7px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: .2s;
+}
+
+nav a.launcher-download:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(34, 211, 238, .3);
 }
 
 /* BUTTONS */
@@ -436,6 +455,84 @@ footer {
     color: #22d3ee;
 }
 
+/* LAUNCHER MODAL */
+
+.launcher-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(3, 3, 12, .82);
+    backdrop-filter: blur(7px);
+}
+
+.launcher-modal.active {
+    display: flex;
+}
+
+.launcher-modal-box {
+    position: relative;
+    width: min(460px, 100%);
+    padding: 34px;
+    text-align: center;
+    background: linear-gradient(145deg, #19152d, #0e1020);
+    border: 1px solid #514078;
+    border-radius: 16px;
+    box-shadow: 0 0 45px rgba(135, 87, 245, .2);
+}
+
+.launcher-modal-icon {
+    font-size: 48px;
+    margin-bottom: 14px;
+}
+
+.launcher-modal-box h2 {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.launcher-modal-box p {
+    color: #b9bdd1;
+    line-height: 1.7;
+    margin-bottom: 23px;
+}
+
+.launcher-modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.launcher-modal-actions .button {
+    width: 100%;
+}
+
+.launcher-close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    border: 0;
+    background: transparent;
+    color: #aaa8c5;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.launcher-close:hover {
+    color: #22d3ee;
+}
+
+.launcher-note {
+    display: block;
+    margin-top: 16px;
+    color: #85839f;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
 /* MOBILE */
 
 @media (max-width: 650px) {
@@ -485,6 +582,11 @@ footer {
             <a href="#status">Статус</a>
             <a href="#news">Новости</a>
             <a href="#about">О студии</a>
+
+            <a href="#" class="launcher-download"
+               onclick="openLauncherModal(); return false;">
+                ↓ СКАЧАТЬ ЛАУНЧЕР
+            </a>
         </nav>
     </div>
 </header>
@@ -552,10 +654,10 @@ footer {
 
                     <br><br>
 
-                    <a class="button cyan"
-                       href="https://github.com/e6784209-pixel/void-studio/releases/download/v0.1-demo/CloudFactory-DEMO.zip">
+                    <button class="button cyan" type="button"
+                            onclick="openLauncherModal()">
                         ↓ DOWNLOAD DEMO
-                    </a>
+                    </button>
                 </div>
             </article>
 
@@ -759,6 +861,81 @@ footer {
         <p>© 2026 VOID STUDIO · Все права защищены.</p>
     </div>
 </footer>
+
+<!-- VOID LAUNCHER WINDOW -->
+
+<div class="launcher-modal" id="launcherModal"
+     onclick="closeLauncherModalOnBackdrop(event)">
+
+    <div class="launcher-modal-box"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="launcherTitle">
+
+        <button class="launcher-close"
+                type="button"
+                aria-label="Закрыть"
+                onclick="closeLauncherModal()">
+            ×
+        </button>
+
+        <div class="launcher-modal-icon">✦</div>
+
+        <h2 id="launcherTitle">VOID LAUNCHER</h2>
+
+        <p>
+            Для загрузки и запуска игр VOID STUDIO
+            используй официальный лаунчер.
+        </p>
+
+        <div class="launcher-modal-actions">
+
+            <a class="button" href="VOID-Launcher-Setup.exe" download>
+                ↓ СКАЧАТЬ VOID LAUNCHER
+            </a>
+
+            <a class="button secondary" href="voidlauncher://open">
+                УЖЕ УСТАНОВЛЕН? ОТКРЫТЬ
+            </a>
+
+        </div>
+
+        <small class="launcher-note">
+            Установщик и запуск через приложение заработают
+            после публикации установщика и настройки протокола
+            VOID LAUNCHER.
+        </small>
+
+    </div>
+</div>
+
+<script>
+function openLauncherModal() {
+    const modal = document.getElementById("launcherModal");
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeLauncherModal() {
+    const modal = document.getElementById("launcherModal");
+
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+function closeLauncherModalOnBackdrop(event) {
+    if (event.target.id === "launcherModal") {
+        closeLauncherModal();
+    }
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeLauncherModal();
+    }
+});
+</script>
 
 </body>
 </html>
